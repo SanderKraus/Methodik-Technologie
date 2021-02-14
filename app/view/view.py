@@ -1,43 +1,37 @@
-from flask import Flask, request, render_template
-from werkzeug.utils import secure_filename
-import pandas as pd
-
-from dataset import DataModel
-
-app = Flask(__name__)
-app.secret_key = "secret"
-
-data = None  # not thread-safe
+from flask import Blueprint, request, render_template
 
 
-@app.route("/", methods=["GET", "POST"])
+view = Blueprint('views', __name__, url_prefix='/')
+
+
+@view.route('/')
 def index():
-    global data
+    return "Hallo Welt"
+
+
+@view.route("/test", methods=["GET", "POST"])
+def test():
     if request.method == "POST":
         if request.files:
             for input in request.files:
                 if input == "file":
                     file = request.files[input]
-                    df_1 = pd.read_excel(file)
-
-                    new_header = df_1.iloc[0]  # grab the first row for the header
-                    df_1 = df_1[1:]  # take the data less the header row
-                    df_1.columns = new_header  # set the header row as the df header
-
-                    # print(df_1)
+                    df_1 = pd.read_excel(file, header=1)
                 elif input == "newfile":
                     file = request.files[input]
-                    df_2 = pd.read_excel(file)
-
-                    new_header = df_2.iloc[0]  # grab the first row for the header
-                    df_2 = df_2[1:]  # take the data less the header row
-                    df_2.columns = new_header  # set the header row as the df header
-
+                    df_2 = pd.read_excel(file, header=1)
                 elif input == "tech":
                     file = request.files[input]
                     df_tech = pd.read_excel(file)
-                    df_tech = df_tech.loc[:, ~df_tech.columns.str.contains("^Unnamed")]
+                    df_tech = df_tech.loc[:, ~
+                                          df_tech.columns.str.contains("^Unnamed")]
                     df_tech = df_tech.dropna(subset=["position"])
+
+            # Datenvergleich: Suche nach neuen Features/ Aenderung finden
+            new_features = compare_features(new_item)
+
+            # Neue Features -- Vergleich mit Technologien -- Return Features mit Technologien
+            feature_techs = get_techs_for_feature(new_features)
 
             print(df_tech)
 
