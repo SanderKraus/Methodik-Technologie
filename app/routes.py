@@ -1,15 +1,15 @@
 from flask import Blueprint, request, render_template
 
 
-view = Blueprint('views', __name__, url_prefix='/')
+routes = Blueprint('routes', __name__, url_prefix='/')
 
 
-@view.route('/')
+@routes.route('/')
 def index():
     return "Hallo Welt"
 
 
-@view.route("/test", methods=["GET", "POST"])
+@routes.route("/test", methods=["GET", "POST"])
 def test():
     if request.method == "POST":
         if request.files:
