@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="display: flex;flex-direction: row;">
+        <div>
+            <h3>Aktuelles Bauteil</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Features</th>
+                        <th>Im Vergleich zum alten Bauteil wurde(n) {{ number_of_rows_deleted }} Feature gelöscht</th>
+                        <th>und {{ number_of_rows_new }} Feature kommen hinzu!</th>
+
+                        {% for key, value in df_deleted.iterrows() %}
+                        <th>{{ value['Name'] }}</th>
+                        {% endfor %}
+                        {% for key, value in df_new.iterrows() %}
+                        <th>{{ value['Name'] }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+venv
+old
+__pycache__
+.DS_Store
+.vscode/settings.json
+
+# For Development | activate in Production
+migrations
+app.db
