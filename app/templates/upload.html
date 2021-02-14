@@ -9,9 +9,13 @@
 
 <body>
   <form method="POST" enctype="multipart/form-data">
-    altes Bauteil<input type="file" name="file">
-    neues Bauteil<input type='file' name='newfile'>
-    Technologien<input type='file' name='tech'>
+    {{ form.csrf_token }}
+    {{ form.techs.label }}
+    {{ form.techs }}
+    {{ form.item_ref.label }}
+    {{ form.item_ref }}
+    {{ form.item_com.label }}
+    {{ form.item_com }}
     <button type="submit">Hochladen</button>
   </form>
 </body>
