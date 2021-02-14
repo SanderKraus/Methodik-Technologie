@@ -56,13 +56,29 @@ def compare_all_classifiers():
 
 
 def compare_fuzz_attributes(res: List):
-    for feature in res:
+    pass
 
-        #possible_class = get_df('techs')['technologie'].drop_duplicates()
-        # Vergleiche attr_com mit possible Attr
-        # Ergebnis: Sind Merkmale durchfuerbar
+    # funktion: vergleiche Referenz-Bauteil mit Vergleichs-Bauteil
+    #       0. Parameter:
+    #           - DF[Ref_Bauteil]
+    #           - DF[Vergleich_Bauteil]
+    #       1. Vergleiche Dataframes auf Aenderung und neue Features
+    #       2. RETURN: Liste von Featuren die neu dazugekommen sind oder sich veraendert haben (andere Werte, neues Merkmal)
+    #
+    # funktion: vergleiche feature mit Technologie
+    #       0. Parameter:
+    #           - Liste von Featuren die neu dazugekommen sind oder sich veraendert haben (andere Werte, neues Merkmal)
+    #           - Alle Tech ||die eine Position haben||
+    #       1. Sortiere Techologien nach Position
+    #       2. Schleife: Fuer jede Tech in Technologien
+    #           2.1 Vergleiche in der Schleife alle veraenderten und neuen Features mit dem Classifier von der Tech
 
-        # 1. Keine Neue Classifier
-        # Wenn neue Classifier
-        #   2. Wenn Classifier nicht in Techs dann "Neue Technologie vom Techplaner anlegen"
-        #   3. Wenn Classifier in Techs dann "Vergleiche Tech mit Feature"
+    technologien = [1, 2, 3, 4]
+
+    features = [7, 8, 9, 1]
+
+    for feature in features:
+        for tech in technologien:
+            if tech['classifier'] in feature['classifier']:
+                value_to_match = feature[tech['column_name_of_value']]
+                tech[]
