@@ -1,4 +1,5 @@
 from flask import Flask
+from pymongo import MongoClient
 
 
 def create_app():

@@ -1,0 +1,23 @@
+{
+  "name": "MegaBohrer1000",
+  "manufacturer": "Bohrer&Partner GmbH",
+  "cost": {
+    "acquisition": 20000,
+    "running": 1000,
+    "apiece": 100
+  },
+  "tools": {
+    "name": "BohrerWerkzeug999",
+    "classifier": "Bohrung",
+    "accuracy": 0.05,
+    "targets": {
+      "breite": {
+        "quadratic": true,
+        "a": 0,
+        "b": 0,
+        "c": 600,
+        "d": 600
+      }
+    }
+  }
+}
