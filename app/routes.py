@@ -38,7 +38,7 @@ def compare_item():
     return 'vergleich'
 
 
-@ routes.route("/upload", methods=["GET", "POST"])
+@routes.route("/upload", methods=["GET", "POST"])
 def test():
     form = UploadForm()
     if form.validate_on_submit():
@@ -46,5 +46,19 @@ def test():
             form.item_ref.data, header=1))
         com_dict = preprocess_item_df(pd.read_excel(
             form.item_com.data, header=1))
+        print(ref_dict)
+        return redirect(url_for('routes.index'))
+    return render_template("upload.html", form=form)
+
+
+@routes.route("/upload_sql", methods=["GET", "POST"])
+def test_sql():
+    form = UploadForm()
+    if form.validate_on_submit():
+        ref_df = pd.read_excel(
+            form.item_ref.data, header=1)
+        com_df = pd.read_excel(
+            form.item_com.data, header=1)
+        print(ref_df)
         return redirect(url_for('routes.index'))
     return render_template("upload.html", form=form)
