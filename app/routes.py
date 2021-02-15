@@ -38,7 +38,7 @@ def compare_item():
     return 'vergleich'
 
 
-@ routes.route("/upload", methods=["GET", "POST"])
+@routes.route("/upload", methods=["GET", "POST"])
 def test():
     form = UploadForm()
     if form.validate_on_submit():
