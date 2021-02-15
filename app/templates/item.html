@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="container">
-  <h3 class="p-3">Neues Referenzbauteil hochladen</h3>
+  <h3 class="p-3">Neues {% if name == 'ref' %}Referenz{% else %}Vergleichs{% endif %} Bauteil hochladen</h3>
   <div class="row">
     <div class="col-sm-6">
       <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
           {{ form.csrf_token }}
-          {{ form.item_ref.label }}
-          {{ form.item_ref}}
-          <div id="emailHelp" class="form-text">Bitte ein Referenzbauteil hochladen</div>
+          {{ form.item.label }}
+          {{ form.item}}
+          <div id="emailHelp" class="form-text">Bitte ein {{ form.item.name }} hochladen</div>
         </div>
         <button type="submit" class="btn btn-primary">Upload</button>
       </form>

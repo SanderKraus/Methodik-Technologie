@@ -13,15 +13,8 @@ class UploadTechForm(FlaskForm):
     ])
 
 
-class UploadItemRefForm(FlaskForm):
-    item_ref = FileField('Referenz Bauteil', render_kw={"class": "form-control"}, validators=[
-        FileRequired(),
-        FileAllowed(['xlsx'])
-    ])
-
-
-class UploadItemComForm(FlaskForm):
-    item_ref = FileField('Vergleichs Bauteil', validators=[
+class UploadItemForm(FlaskForm):
+    item = FileField('Bauteil', render_kw={"class": "form-control"}, validators=[
         FileRequired(),
         FileAllowed(['xlsx'])
     ])
