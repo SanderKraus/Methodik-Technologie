@@ -23,7 +23,7 @@ def item(name):
     if form.validate_on_submit():
         item_dict = preprocess_item_df(pd.read_excel(
             form.item.data, header=1))
-        mongo_delete_collection(name)
+        mongo_delete_collection(f"{name}_features")
         mongo_insert(f"{name}_features", item_dict)
     return render_template("item.html", form=form, name=name)
 

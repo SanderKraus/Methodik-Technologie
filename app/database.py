@@ -1,3 +1,4 @@
+import pprint
 from bson.objectid import ObjectId
 from pymongo import MongoClient, mongo_client
 
@@ -22,7 +23,10 @@ def mongo_delete_collection(collection: str):
 def compare_item_collections() -> dict:
     collections = ['ref_features', 'com_features']
     if all(x in collections for x in client.list_collection_names()):
-        data = client[collections[0]].find()
+        ref = client[collections[0]].find_one()
+        d = [x['#'] for x in ref['data']]
+        print(d)
+        com = client[collections[1]].find_one()
         return {}
     else:
         return {}
