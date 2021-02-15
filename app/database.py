@@ -24,9 +24,13 @@ def compare_item_collections() -> dict:
     collections = ['ref_features', 'com_features']
     if all(x in collections for x in client.list_collection_names()):
         ref = client[collections[0]].find_one()
-        d = [x['#'] for x in ref['data']]
-        print(d)
         com = client[collections[1]].find_one()
+        d = list(set([x['name'] for x in ref['data']]) -
+                 set([x['name'] for x in com['data']]))
+        print(d)
+        '''
+        Vergleiche alle Namen
+        '''
         return {}
     else:
         return {}

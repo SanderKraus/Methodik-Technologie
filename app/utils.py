@@ -27,4 +27,4 @@ def clean_values(x: pd.Series) -> pd.Series:
 
 
 def clean_column_names(col_names: List[str]) -> List:
-    return [name.split(':')[0].strip() for name in col_names]
+    return [name.split(':')[0].strip().lower() for name in col_names]
