@@ -19,7 +19,10 @@ def mongo_delete_collection(collection: str):
         client[collection].drop()
 
 
-def compare_item_collections():
+def compare_item_collections() -> dict:
     collections = ['ref_features', 'com_features']
-    if collections in client.list_collection_names():
-        print(client[collections[0]].find())
+    if all(x in collections for x in client.list_collection_names()):
+        data = client[collections[0]].find()
+        return {}
+    else:
+        return {}

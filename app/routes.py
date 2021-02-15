@@ -1,6 +1,6 @@
 from app.utils import preprocess_item_df
 from app.forms import UploadForm, UploadTechForm, UploadItemForm
-from app.database import mongo_insert, mongo_delete_collection, mongo_get_one
+from app.database import mongo_insert, mongo_delete_collection, mongo_get_one, compare_item_collections
 import pandas as pd
 from flask import Blueprint, request, render_template, redirect, url_for, g
 
@@ -34,8 +34,9 @@ def tech_chain():
 
 
 @routes.route('/compare')
-def compare_item():
-    return 'vergleich'
+def compare():
+    results = compare_item_collections()
+    return render_template('compare.html', results=results)
 
 
 @ routes.route("/upload", methods=["GET", "POST"])
