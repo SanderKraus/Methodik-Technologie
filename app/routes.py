@@ -1,4 +1,7 @@
-from app.utils import clean_column_names, clean_values_sql, preprocess_item_df
+from app.utils import (
+    clean_dataframe,
+    preprocess_item_df,
+)
 from app.forms import UploadForm, UploadTechForm, UploadItemComForm, UploadItemRefForm
 from app.database import mongo_insert, mongo_delete_collection, mongo_get_one
 import pandas as pd
@@ -44,21 +47,11 @@ def test():
         df_ref = pd.read_excel(form.item_ref.data, header=1)
         df_ecr = pd.read_excel(form.item_com.data, header=1)
 
-        df_ref = df_ref.iloc[:, :-1]
-        df_ecr = df_ecr.iloc[:, :-1]
+        df_ref = clean_dataframe(df_ref)
+        df_ecr = clean_dataframe(df_ecr)
 
-        df_ref.columns = clean_column_names(df_ref.columns.tolist())
-        df_ecr.columns = clean_column_names(df_ecr.columns.tolist())
-
-        for name, col in df_ref.iteritems():
-            x = col.apply(str).str.replace("mm", "")
-            y = x.str.replace(",", ".")
-            try:
-                y = y.astype("float64")
-            except ValueError:
-                y = y.astype("string")
-            df_ref[name] = y
         print(df_ref)
+        print(df_ecr)
 
         # df_deleted = df_ref.merge(df_ecr, how="outer", indicator=True).loc[
         #     lambda x: x["_merge"] == "left_only"

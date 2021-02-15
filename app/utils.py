@@ -26,3 +26,17 @@ def clean_values(x: pd.Series) -> pd.Series:
 
 def clean_column_names(col_names: List[str]) -> List:
     return [name.split(":")[0].strip() for name in col_names]
+
+
+def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.iloc[:, :-1]
+    df.columns = clean_column_names(df.columns.tolist())
+    for name, col in df.iteritems():
+        x = col.apply(str).str.replace("mm", "")
+        y = x.str.replace(",", ".")
+        try:
+            y = y.astype("float64")
+        except ValueError:
+            y = y.astype("string")
+        df[name] = y
+    return df
