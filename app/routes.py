@@ -50,19 +50,13 @@ def test():
         df_ref.columns = clean_column_names(df_ref.columns.tolist())
         df_ecr.columns = clean_column_names(df_ecr.columns.tolist())
 
-        # print(df_ref.columns)
-        # print(df_ecr.columns)
-
-        # df_ref.replace("mm", "").apply()
         for name, col in df_ref.iteritems():
             x = col.apply(str).str.replace("mm", "")
             y = x.str.replace(",", ".")
-
             try:
                 y = y.astype("float64")
             except ValueError:
                 y = y.astype("string")
-
             df_ref[name] = y
         print(df_ref)
 
