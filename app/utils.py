@@ -40,3 +40,11 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             y = y.astype("string")
         df[name] = y
     return df
+
+
+def merge_data(df: pd.DataFrame, df_1: pd.DataFrame) -> pd.DataFrame:
+    df = df.merge(df_1, how="outer", indicator=True).loc[
+        lambda x: x["_merge"] == "left_only"
+    ]
+    df = df.reset_index(drop=True)
+    return df

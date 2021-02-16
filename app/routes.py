@@ -1,6 +1,7 @@
 from app.utils import (
     clean_dataframe,
     preprocess_item_df,
+    merge_data,
 )
 from app.forms import UploadForm, UploadTechForm, UploadItemComForm, UploadItemRefForm
 from app.database import mongo_insert, mongo_delete_collection, mongo_get_one
@@ -50,33 +51,8 @@ def test():
         df_ref = clean_dataframe(df_ref)
         df_ecr = clean_dataframe(df_ecr)
 
-        print(df_ref)
-        print(df_ecr)
+        df_chainged = merge_data(df_ref, df_ecr)
+        df_new = merge_data(df_ecr, df_ref)
 
-        # df_deleted = df_ref.merge(df_ecr, how="outer", indicator=True).loc[
-        #     lambda x: x["_merge"] == "left_only"
-        # ]
-        # df_deleted = df_deleted.reset_index(drop=True)
-        # index_deleted = df_deleted.index
-
-        # number_of_rows_deleted = len(index_deleted)
-
-        # df_new = df_ref.merge(df_ecr, how="outer", indicator=True).loc[
-        #     lambda x: x["_merge"] == "right_only"
-        # ]
-        # df_new = df_new.reset_index(drop=True)
-        # index_new = df_new.index
-
-        # number_of_rows_new = len(index_new)
-
-        # df = pd.concat([df_ref, df_ecr])
-        # df = df.drop_duplicates(keep=False)
-        # print(df)
-        # df = df.reset_index(drop=True)
-
-        # df_gpby = df.groupby(list(df.columns))
-
-        # idx = [x[0] for x in df_gpby.groups.values() if len(x) == 1]
-
-        return redirect(url_for("routes.index"))
+        return redirect(url_for("routes.index", df_chainged=df_chainged, df_new=df_new))
     return render_template("upload.html", form=form)
