@@ -48,3 +48,9 @@ def merge_data(df: pd.DataFrame, df_1: pd.DataFrame) -> pd.DataFrame:
     ]
     df = df.reset_index(drop=True)
     return df
+
+
+def clean_merkmale(df):
+    df = df[df.columns.drop(list(df.filter(like="+")))]
+    df = df[df.columns.drop(list(df.filter(like="-")))]
+    return df

@@ -2,6 +2,7 @@ from app.utils import (
     clean_dataframe,
     preprocess_item_df,
     merge_data,
+    clean_merkmale,
 )
 from app.forms import UploadForm, UploadTechForm, UploadItemComForm, UploadItemRefForm
 from app.database import mongo_insert, mongo_delete_collection, mongo_get_one
@@ -54,5 +55,11 @@ def test():
         df_chainged = merge_data(df_ref, df_ecr)
         df_new = merge_data(df_ecr, df_ref)
 
-        return redirect(url_for("routes.index", df_chainged=df_chainged, df_new=df_new))
+        df_chainged = clean_merkmale(df_chainged)
+        df_new = clean_merkmale(df_new)
+
+        print(df_chainged)
+        print(df_new)
+
+        return redirect(url_for("routes.index"))
     return render_template("upload.html", form=form)
