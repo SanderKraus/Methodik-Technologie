@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+    .container-wrapper {
+        background-color: rgba(0, 84, 159, 0.5);
+        border-radius: 4px;
+    }
+
+    .table-container {
+        background-color: white;
+        border-radius: 4px;
+
+    }
+
+    .input-container {
+        background-color: white;
+        border-radius: 4px;
+        width: auto;
+    }
+
+    .form-group input {
+        width: auto;
+    }
+
+    table input {
+        width: 50px;
+    }
+
+    input {
+        margin: 15px;
+        width: auto
+    }
+
+    dataframe {
+        background-color: white;
+        border-radius: 4px;
+    }
+</style>
+
+<body>
+    <div class="container container-wrapper">
+        <form action="/main/create_technology" name="input" method="POST">
+            <table class="table table-hover" border="3" align="center">
+                <tr>
+                    {% if name is defined %}
+                    <th>Technologie: <input type="text" name="name" value="{{ name }}" readonly> </th>
+                    {% else %}
+                    <th>Technologie: <input type="text" name="name"> </th>
+                    {% endif %}
+                    <th>a</th>
+                    <th>b</th>
+                    <th>c</th>
+                    <th>d</th>
+                </tr>
+                <tr>
+                    <th><input type="text" name="fähigkeit0"></th>
+                    <th><input type="text" name="a0"></th>
+                    <th><input type="text" name="b0"></th>
+                    <th><input type="text" name="c0"></th>
+                    <th><input type="text" name="d0"></th>
+                </tr>
+            </table>
+            <input type="submit" value="Technologie hinzufügen">
+            <input type="button" class="btn btn-primary btn-lg" name="button" value="Schließen"
+                onclick="window.open(' /main/ft ', 'einNeuesFenster');">
+        </form>
+        {% for Tabelle in Tabelle %}
+        {{ Tabelle|safe }}
+        {% endfor %}
+        Position im Fertigungssystem:<input type="text" name="position" required>
+        <br>
+    </div>
+    </div>
+</body>
+{% endblock %}
