@@ -28,6 +28,11 @@ def clean_column_names(col_names: List[str]) -> List:
     return [name.split(":")[0].strip() for name in col_names]
 
 
+def clean_datatech(df: pd.DataFrame) -> pd.DataFrame:
+
+    return df
+
+
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     df = df.iloc[:, :-1]
     df.columns = clean_column_names(df.columns.tolist())

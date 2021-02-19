@@ -3,6 +3,7 @@ from app.utils import (
     preprocess_item_df,
     merge_data,
     clean_merkmale,
+    clean_datatech,
 )
 from app.forms import (
     UploadForm,
@@ -54,6 +55,8 @@ def test():
         df_ref = pd.read_excel(form.item_ref.data, header=1)
         df_ecr = pd.read_excel(form.item_com.data, header=1)
         df_tech = pd.read_excel(form.item_tech.data)
+
+        df_tech = clean_datatech(df_tech)
 
         print(df_tech)
         df_ref = clean_dataframe(df_ref)
