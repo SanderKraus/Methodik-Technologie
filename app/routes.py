@@ -14,7 +14,7 @@ def index():
 
 @routes.route('/techs')
 def techs():
-    return "techs"
+    return render_template("technology.html")
 
 
 @routes.route('/item/<name>', methods=['GET', 'POST'])
@@ -36,6 +36,7 @@ def tech_chain():
 @routes.route('/compare')
 def compare():
     results = compare_item_collections()
+    print(results)
     return render_template('compare.html', results=results)
 
 
